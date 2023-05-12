@@ -11,7 +11,11 @@ class Bored:
         Returns:
             str: text of activity
         '''
-        pass
+        url = f'{self.url}activity/'
+        r = requests.get(url)
+
+        if r.status_code == 200: return r.json()
+        else: return False
 
     def get_activity_by_type(self, type: str) -> dict:
         '''get activity by type
@@ -25,7 +29,15 @@ class Bored:
         Returns:
             dict: activity data
         '''
-        pass
+        url = f'{self.url}activity/'
+
+        payoad = {
+            'type': type
+        }
+        r = requests.get(url,params=payoad)
+
+        if r.status_code == 200: return r.json()
+        else: return False
 
     def get_activity_by_id(self, key: int) -> dict:
         '''get activity by key
@@ -86,3 +98,9 @@ class Bored:
             dict: activity data
         '''
         pass
+    
+
+
+
+bpred = Bored()
+print(bpred.get_activity_by_type('social'))
